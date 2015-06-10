@@ -1,0 +1,61 @@
+<ion-view view-title="Автосервисы" ng-controller="AutoservicesCtrl as vm">
+    <ion-content>
+        <ion-refresher
+                pulling-text="Потяните, чтобы обновить"
+                on-refresh="vm.refreshSTO()">
+        </ion-refresher>
+
+        <ion-list>
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="text" placeholder="Поиск автосервиса" ng-model="vm.inputText">
+                </label>
+            </div>
+
+            <div ng-repeat="sto in vm.corstestdata">
+                <div ng-repeat="(key, value) in sto">
+                    {{key}} : {{value}}
+                </div>
+            </div>
+
+            <div class="list card"  ng-repeat="sto in vm.autoservices | filter: vm.inputText |  orderBy: 'title'">
+
+                <div class="item item-avatar  item-icon-right" >
+                    <img src="img/sto.png">
+                    <h2>{{sto.title}}</h2>
+                    <p>{{sto.address}}</p>
+                    <a class="button button-icon icon icon ion-location" ng-click="vm.openGeo(sto.coord.lat, sto.coord.long)"></a>
+                    <!--<a href="geo:37.786971,-122.399677;u=35"><i class="icon ion-location"></i></a>-->
+                </div>
+
+                <div class="item item-body">
+                    <p>
+                        {{sto.about}}
+                    </p>
+                </div>
+
+                <div class="item tabs tabs-secondary tabs-icon-left">
+                    <a class="tab-item" ng-href="http://{{sto.web}}" target="_blank" ng-if="sto.web">
+                        <i class="icon ion-earth"></i>
+                        Сайт
+                    </a>
+                    <a class="tab-item" ng-click="vm.callMe(sto.phone)" ng-if="sto.phone">
+                        <i class="icon ion-android-call"></i>
+                        Позвонить
+                    </a>
+                    <a class="tab-item" href="#/tab/chats/{{sto.id}}" ng-if="sto.chat">
+                        <i class="icon ion-chatbubble-working"></i>
+                        Написать
+                    </a>
+                </div>
+
+            </div>
+        </ion-list>
+        <!--<div onclick="window.open('tel:555-555-555', '_system', 'location=yes')">CALLME</div>-->
+
+<!--        <button class="button" ng-click="vm.cors()">
+            Запрос
+        </button>-->
+    </ion-content>
+</ion-view>

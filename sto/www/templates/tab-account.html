@@ -1,0 +1,87 @@
+<ion-view view-title="Аккаунт" ng-controller="AccountCtrl as vm">
+    <ion-content>
+        <ion-list>
+            <!--<ion-toggle ng-model="settings.enableFriends">
+                Enable Friends
+            </ion-toggle>-->
+            <ion-item class="item-divider">
+                Мои данные
+            </ion-item>
+            <ion-item>
+                <p><span class="item-note-left">ФИО</span></p>
+                Иванов Иван Иванович
+            </ion-item>
+            <ion-item>
+                <p><span class="item-note-left">email</span></p>
+                example@mail.ru
+            </ion-item>
+            <ion-item>
+                <p><span class="item-note-left">Ник</span></p>
+               Nickname
+            </ion-item>
+            <ion-item>
+                <p><span class="item-note-left">Контактное лицо</span></p>
+               Иванов Иван Иванович
+            </ion-item>
+            <ion-item>
+                <p><span class="item-note-left">Физический адрес</span></p>
+                г. Москва, ул. Мира 14 д. 54
+            </ion-item>
+            <ion-item>
+                <p><span class="item-note-left">Юридический адрес</span></p>
+                г. Нижний Новогород, ул. Парковая д. 14 оф. 1
+            </ion-item>
+            <!--<ion-item class="item-icon-left">
+                <i class="icon ion-home"></i>
+                Юридический адрес
+                <p><span class="item-note">г. Нижний Новогород, ул. Парковая д. 14 оф. 1</span></p>
+            </ion-item>-->
+            <ion-item>
+                <p><span class="item-note-left">Скидка</span></p>
+                12%
+            </ion-item>
+
+            <ion-item class="item-divider">
+                Мои автомобили
+            </ion-item>
+
+            <ion-item class="item-icon-left item-icon-right" href="#/tab/account/car/{{auto.id}}" ng-repeat="auto in vm.userAutos">
+                <i class="icon ion-model-s" ng-class="{'balanced': auto.isActive}"></i>
+                <p><span class="item-note-left">Модель</span></p>
+                {{auto.model}}
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+
+            <!--<ion-item class="item-icon-left item-icon-right" href="#/tab/account/car/1">
+                <i class="icon ion-model-s"></i>
+                <p><span class="item-note-left">Модель</span></p>
+                XC80
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+
+            <ion-item class="item-icon-left item-icon-right" href="#/tab/account/car/1">
+                <i class="icon ion-model-s"></i>
+                <p><span class="item-note-left">Модель</span></p>
+                Audi q7
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>-->
+
+
+            <ion-item class="item-divider">
+                Дополнительно
+            </ion-item>
+
+            <ion-item class="item-icon-left item-icon-right" href="#/tab/guru/evacuators">
+                <i class="icon ion-medkit"></i>
+                Вызвать эвакуатор
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+
+
+            <ion-item class="item-icon-right" href="#/welcome">
+                Выход
+                <i class="icon ion-log-out"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,56 @@
+<ion-view view-title="Автомобиль" ng-controller="SingleCar as vm">
+    <ion-nav-buttons side="right">
+        <button class="button icon ion-trash-a" ng-click="doSomething()">
+            <!--<a class="button button-icon icon ion-trash-a"></a>-->
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-icon-left item-divider">
+                <i class="icon ion-model-s" ng-class="{'balanced': vm.currentAuto.isActive}"></i>
+                <p><span class="item-note-left">Модель</span></p>
+                {{vm.currentAuto.model}}
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-clipboard"></i>
+                <p><span class="item-note-left">Гос.номер</span></p>
+                {{vm.currentAuto.gos_numb}}
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-information-circled"></i>
+                <p><span class="item-note-left">VIN</span></p>
+                {{vm.currentAuto.vin}}
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-settings"></i>
+                <p><span class="item-note-left">Основное СТО</span></p>
+                {{vm.currentAuto.base_cto}}
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-speedometer"></i>
+                <p><span class="item-note-left">Пробег</span></p>
+                {{vm.currentAuto.distance}} км.
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-calendar"></i>
+                <p><span class="item-note-left">Дата покупки а/м</span></p>
+                {{vm.currentAuto.buy_date | date}}
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-clock"></i>
+                <p><span class="item-note-left">Дата получения пробега</span></p>
+                {{vm.currentAuto.distance_date | date}}
+            </ion-item>
+            <ion-item class="item-divider">
+               Отчеты по неисправностям
+            </ion-item>
+            <ion-item class="item-icon-left item-icon-right" href="#/tab/account/car/{{vm.currentAuto.id}}/report/1">
+                <i class="icon ion-wrench"></i>
+                <p><span class="item-note-left">29 апреля 2015</span></p>
+                Отчет №1
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

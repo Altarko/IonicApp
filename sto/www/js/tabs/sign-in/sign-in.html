@@ -1,0 +1,22 @@
+<ion-view view-title="Авторизация" ng-controller="SignInCtrl as vm">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Пользователь</span>
+                <input type="text" ng-model="vm.user.username">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Пароль</span>
+                <input type="password" ng-model="vm.user.password">
+            </label>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="vm.login(vm.user)">
+                Войти
+            </button>
+            <!--<p class="text-center">
+                <a href="#/forgot-password">забыли пароль?</a>
+            </p>-->
+        </div>
+    </ion-content>
+</ion-view>

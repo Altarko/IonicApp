@@ -1,0 +1,35 @@
+[
+  {
+    "model": "XC90 4.4 (V8)",
+    "gosnum": "С456ТР77",
+    "vin": "58474",
+    "sto": "",
+    "km":"5484",
+    "databuy":"2014-05-16",
+    "datakm":"2014-12-15",
+    "isActive": true,
+    "id": "1"
+  },
+  {
+    "model": "XC90",
+    "gosnum": "К123РТ90",
+    "vin": "33342",
+    "sto": "",
+    "km":"2784",
+    "databuy":"2014-07-05",
+    "datakm":"2014-09-15",
+    "isActive": false,
+    "id": "2"
+  },
+  {
+    "model": "Audi Q7",
+    "gosnum": "О949ТТ",
+    "vin": "33234",
+    "sto": "",
+    "km":"500",
+    "databuy":"2015-04-01",
+    "datakm":"2015-04-20",
+    "isActive": false,
+    "id": "3"
+  }
+]

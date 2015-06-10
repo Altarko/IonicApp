@@ -1,0 +1,51 @@
+<ion-view view-title="Добро пожаловать" ng-controller="SignInCtrl as vm">
+    <ion-content>
+
+
+        <!--<div class="item item-image">
+            <img src="img/logo.jpg">
+        </div>
+        &lt;!&ndash;<div class="right">
+            <h1>Guru Drive Consult</h1>
+        </div>&ndash;&gt;
+
+        <div class="list">
+            <a class="item" href="#/sign-in">
+                Авторизация
+            </a>
+
+            <a class="item" href="#">
+                Создать пользователя
+            </a>
+
+            &lt;!&ndash;<a class="item" href="#/tab/guru">
+                Режим демонстрации
+            </a>&ndash;&gt;
+        </div>-->
+        <div class="row responsive-sm">
+            <div class="col col-50 col-offset-25">
+
+                    <div class="item">
+                        <div class="logo text-center padding">
+                            <h1><img src="http://placehold.it/200x200&text=Logo"/></h1>
+                        </div>
+                        <div class="list">
+                            <label class="item item-input">
+                                <input type="text" placeholder="Пользователь" ng-model="vm.user.username">
+                            </label>
+                            <label class="item item-input">
+                                <input type="password" placeholder="Пароль" ng-model="vm.user.password">
+                            </label>
+                        </div>
+                        <a class="button button-block button-calm" ng-click="vm.login(vm.user)">Войти</a>
+                        <div class="button-bar bar-clear">
+                            <a class="button" href="#">Регистрация</a>
+                            <a class="button" href="#">Забыли пароль?</a>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

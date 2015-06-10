@@ -1,0 +1,22 @@
+<ion-view view-title="Авторизация">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Пользователь</span>
+                <input type="text" ng-model="user.username">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Пароль</span>
+                <input type="password" ng-model="user.password">
+            </label>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="signIn(user)">
+                Войти
+            </button>
+            <!--<p class="text-center">
+                <a href="#/forgot-password">забыли пароль?</a>
+            </p>-->
+        </div>
+    </ion-content>
+</ion-view>

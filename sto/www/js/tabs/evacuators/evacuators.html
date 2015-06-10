@@ -1,0 +1,10 @@
+<ion-view view-title="Вызов эвакуатора" ng-controller="EvacuatorsCtrl as vm">
+    <ion-content>
+        <div class="list">
+            <a class="item item-icon-right" ng-click="vm.callMe(eva.phone)" ng-repeat="eva in vm.evacuators">
+                {{eva.title}}
+                <i class="icon ion-ios-telephone-outline"></i>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

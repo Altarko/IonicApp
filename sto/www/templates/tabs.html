@@ -1,0 +1,29 @@
+<!--
+Create tabs with an icon and label, using the tabs-positive style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
+  <!-- Диагностика -->
+  <ion-tab title="Диагностика" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/guru">
+    <ion-nav-view name="tab-guru"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Чаи -->
+  <ion-tab title="Чат" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/tab/chats">
+    <ion-nav-view name="tab-chats"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Автосервисы -->
+  <ion-tab title="Автосервисы" icon-off="ion-ios-speedometer-outline" icon-on="ion-ios-speedometer" href="#/tab/services">
+    <ion-nav-view name="tab-services"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Аккаунт -->
+  <ion-tab title="Аккаунт" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/account">
+    <ion-nav-view name="tab-account"></ion-nav-view>
+  </ion-tab>
+
+
+</ion-tabs>
