@@ -1,0 +1,20 @@
+<ion-view view-title="Неисправность" ng-controller="Step4Defects as vm">
+    <ion-content>
+        <div class="list list-inset">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Тип неисправности:
+                </div>
+                <select ng-options="defect as defect.name for defect in vm.defects" ng-model="vm.userDefect">
+                    <!--<option ng-repeat="auto in vm.autos">{{auto.gos_numb}}</option>-->
+                </select>
+            </label>
+        </div>
+        <div class="button-bar">
+            <a class="button">Пропустить</a>
+            <a class="button button-balanced"
+               ng-class="{'disabled': !vm.userDefect.id}"
+               href="#/tab/guru/km" ng-click="vm.DefectTypeSelected()">Далее</a>
+        </div>
+    </ion-content>
+</ion-view>

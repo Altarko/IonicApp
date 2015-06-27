@@ -69,12 +69,22 @@ angular.module('STO', ['ionic', 'starter.controllers', 'starter.services', 'ngCo
 
             // Each tab has its own nav history stack:
 
+            // ????? ??????????
             .state('tab.guru', {
                 url: '/guru',
                 views: {
                     'tab-guru': {
-                        templateUrl: 'js/tabs/guru/tab-guru-km.html',
-                        controller: 'DashCtrl'
+                        templateUrl: 'js/tabs/guru/tab-step-1-selectcar.html'
+                    }
+                }
+            })
+
+            // ??????
+            .state('tab.guru-km', {
+                url: '/guru/km',
+                views: {
+                    'tab-guru': {
+                        templateUrl: 'js/tabs/guru/tab-step-2-millage.html'
                     }
                 }
             })
@@ -83,8 +93,16 @@ angular.module('STO', ['ionic', 'starter.controllers', 'starter.services', 'ngCo
                 url: '/guru/whosefault',
                 views: {
                     'tab-guru': {
-                        templateUrl: 'js/tabs/guru/tab-guru-whosefault.html',
-                        controller: 'DashCtrl'
+                        templateUrl: 'js/tabs/guru/tab-step-3-defectstypes.html'
+                    }
+                }
+            })
+
+            .state('tab.guru-step-4', {
+                url: '/guru/step4',
+                views: {
+                    'tab-guru': {
+                        templateUrl: 'js/tabs/guru/tab-step-4-defects.html'
                     }
                 }
             })

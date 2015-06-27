@@ -1,3 +1,6 @@
+/**
+ * Сервис запрашивает автомобили пользователя
+ */
 angular
     .module('STO')
     .factory('userautos', userautos);
@@ -31,14 +34,10 @@ function userautos($http, $q, addData, config) {
         // или запрашиваем
         } else {
             var dataPost = addData.addData();
-            /*return $http.get('http://alexeytarasenko.ru/projects/stoapi/userautos.php')
-                .then(getAComplete)
-                .catch(getAFailed);*/
-
             return $http({
                 url: config.url + '/ctoweb/rest/get_entities/get_ts',
                 method: "POST",
-                //withCredentials: true,
+                withCredentials: true,
                 data: dataPost,
                 headers: {
                     'Content-Type' :'application/x-www-form-urlencoded; charset=UTF-8',
@@ -60,21 +59,6 @@ function userautos($http, $q, addData, config) {
             }
         }
     }
-
-/*    function getAutoId() {
-            return $http.get('http://alexeytarasenko.ru/projects/stoapi/userautos.php')
-                .then(getAComplete)
-                .catch(getAFailed);
-
-            function getAComplete(response) {
-                autos = response.data;
-                return (response.data);
-            }
-
-            function getAFailed(error) {
-                return (error.data = 'Ошибка получения списка автомобилей пользователя');
-            }
-    }*/
 
     function getAutoId(carId) {
         var data = {};
