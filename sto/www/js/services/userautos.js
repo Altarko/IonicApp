@@ -49,7 +49,6 @@ function userautos($http, $q, addData, config) {
                 .catch(getAFailed);
 
             function getAComplete(response) {
-                console.log(response.data.data);
                 autos = response.data.data;
                 return (response.data.data);
             }

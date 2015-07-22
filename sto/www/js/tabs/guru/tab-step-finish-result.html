@@ -1,10 +1,11 @@
-<ion-view view-title="Печальные результаты">
+<ion-view view-title="Печальные результаты" ng-controller="StepFinishCtrl as vm">
     <ion-content>
         <div class="list card">
 
             <div class="item item-body text-center">
-                <h1>Все плохо!</h1>
-                <h2 class="subdued">С вероятностью 99%</h2>
+                <!--<h1>Все плохо!</h1>
+                <h2 class="subdued">С вероятностью 99%</h2>-->
+                <h2>{{vm.results.resultMsg}}</h2>
             </div>
 
             <br/>

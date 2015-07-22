@@ -132,8 +132,7 @@ angular.module('STO', ['ionic', 'starter.controllers', 'starter.services', 'ngCo
                 url: '/guru/result',
                 views: {
                     'tab-guru': {
-                        templateUrl: 'js/tabs/guru/tab-guru-result.html',
-                        controller: 'DashCtrl'
+                        templateUrl: 'js/tabs/guru/tab-step-finish-result.html'
                     }
                 }
             })

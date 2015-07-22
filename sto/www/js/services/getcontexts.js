@@ -1,22 +1,22 @@
 angular
     .module('STO')
-    .factory('setMilage', setMilage);
+    .factory('getContexts', getContexts);
 
-setMilage.$inject = ['$http', 'config'];
+getContexts.$inject = ['$http', 'config'];
 
 /* @ngInject */
-function setMilage($http, config) {
+function getContexts($http, config) {
     var service = {
-        setMilagePost: setMilagePost
+        getContextsPost: getContextsPost
     };
 
     return service;
 
     ////////////////
 
-    function setMilagePost(dataPost) {
+    function getContextsPost(dataPost) {
         return $http({
-            url: config.url + '/ctoweb/rest/get_entities/set_milage',
+            url: config.url + '/ctoweb/rest/get_entities/get_contexts',
             method: "POST",
             //withCredentials: true,
             data: dataPost,
@@ -30,12 +30,13 @@ function setMilage($http, config) {
             .catch(getMFailed);
 
         function getMComplete(response) {
+            //console.log(response.data);
             //autos = response.data.data;
-            return (response.data);
+            return (response.data.data);
         }
 
         function getMFailed(error) {
-            return (error.data = 'Ошибка передачи пробега');
+            return (error.data = 'Ошибка передачи контекста');
         }
     }
 

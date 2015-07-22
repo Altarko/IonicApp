@@ -37,8 +37,8 @@ function Step2millage(guruinfo, currentUser, formEncode, setMilage) {
             session_id: currentUserInfo.session_key,
             account_id: currentUserInfo.account_id,
             milage: vm.userAuto.distance,
-            curTsId:vm.userAuto.id,
-            curTsIndex:0
+            curTsId: vm.userAuto.id,
+            curTsIndex: 0
         });
         setMilage.setMilagePost(obj).then(function(response){
             console.log(response);
@@ -46,7 +46,7 @@ function Step2millage(guruinfo, currentUser, formEncode, setMilage) {
     }
 
     /**
-     * Запрашиваем выбранные пользователем автомобиль
+     * Запрашиваем выбранный пользователем автомобиль
      * @returns {*}
      */
     function getUserAuto() {

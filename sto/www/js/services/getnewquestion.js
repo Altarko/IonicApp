@@ -1,22 +1,22 @@
 angular
     .module('STO')
-    .factory('setMilage', setMilage);
+    .factory('getNewQuestion', getNewQuestion);
 
-setMilage.$inject = ['$http', 'config'];
+getNewQuestion.$inject = ['$http', 'config'];
 
 /* @ngInject */
-function setMilage($http, config) {
+function getNewQuestion($http, config) {
     var service = {
-        setMilagePost: setMilagePost
+        getNewQuestionPost: getNewQuestionPost
     };
 
     return service;
 
     ////////////////
 
-    function setMilagePost(dataPost) {
+    function getNewQuestionPost(dataPost) {
         return $http({
-            url: config.url + '/ctoweb/rest/get_entities/set_milage',
+            url: config.url + '/ctoweb/rest/get_entities/get_new_question',
             method: "POST",
             //withCredentials: true,
             data: dataPost,
@@ -30,12 +30,12 @@ function setMilage($http, config) {
             .catch(getMFailed);
 
         function getMComplete(response) {
-            //autos = response.data.data;
-            return (response.data);
+            console.log(response.data.data2[0]);
+            return (response.data.data2[0]);
         }
 
         function getMFailed(error) {
-            return (error.data = 'Ошибка передачи пробега');
+            return (error.data = 'Ошибка получения ответа по диагностике');
         }
     }
 

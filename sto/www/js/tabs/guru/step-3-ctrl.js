@@ -47,5 +47,4 @@ function Step3Defecttypes(DefectTypes, guruinfo) {
         guruinfo.setUserDefectType(vm.userDefectType);
     }
 
-
 }
