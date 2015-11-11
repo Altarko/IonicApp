@@ -2,10 +2,8 @@ angular
     .module('STO')
     .controller('AutoservicesCtrl', AutoservicesCtrl);
 
-AutoservicesCtrl.$inject = ['$scope', '$http', 'autoservices', '$cordovaInAppBrowser', '$cookies', '$window', 'cookieStore'];
-
 /* @ngInject */
-function AutoservicesCtrl($scope, $http, autoservices, $cordovaInAppBrowser, $cookies, $window, cookieStore) {
+function AutoservicesCtrl($scope, autoservices, $window, Sto) {
     /* jshint validthis: true */
     var vm = this;
 
@@ -26,30 +24,15 @@ function AutoservicesCtrl($scope, $http, autoservices, $cordovaInAppBrowser, $co
     ////////////////
 
     function activate() {
-        /*$cookies.put('JSESSIONID', '43e7cf24ef8ea792de136a83afda');
-        var cookie = $cookies.JSESSIONID; // suppose you already set $cookies.myCookie= 'xxx';
-        console.log();
-        $http.defaults.headers.post.Cookies = cookie;*/
-        // Retrieving a cookie
-       //var cookie = $cookies.JSESSIONID;
-        // Setting a cookie
-        //$cookies.JSESSIONID = 'JSESSIONID=761f6e2458660aa2bfe10ac8d573';
-
         getAutoservices();
-        /*cookieStore.put("JSESSIONID", "bc53950ebccd24113e548ab0e341");
-        return cors().then(function(response) {
-            vm.corstestdata = response;
-            return vm.corstestdata
-        });*/
     }
-
 
     /**
      *
      * @returns {*}
      */
     function getAutoservices() {
-        return autoservices.getAutoServices().then(function(response) {
+        return Sto.getStoList().then(function(response) {
             vm.autoservices = response;
             console.log(response);
             return vm.autoservices;

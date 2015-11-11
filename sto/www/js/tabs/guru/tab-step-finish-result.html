@@ -1,4 +1,4 @@
-<ion-view view-title="Печальные результаты" ng-controller="StepFinishCtrl as vm">
+<ion-view view-title="Результаты" ng-controller="StepFinishCtrl as vm">
     <ion-content>
         <div class="list card">
 
@@ -10,20 +10,22 @@
 
             <br/>
             <div class="item tabs tabs-secondary tabs-icon-top">
+
                 <a class="tab-item" href="#/tab/chats">
-                    <i class="icon ion-medkit"></i>
-                    Вызвать эвакуатор
-                </a>
-                <a class="tab-item" href="#/tab/services">
                     <i class="icon ion-chatbubble-working"></i>
                     Обратиться в автосервис
                 </a>
-                <a class="tab-item" href="#">
-                    <i class="icon ion-archive"></i>
-                    Сохранить отчет
-                </a>
+                <label class="checkbox">
+                    <input type="checkbox">
+                </label>
+                Вызвать эвакуатор
             </div>
 
+        </div>
+        <div class="button-bar">
+            <a class="button button-balanced"
+               ng-click="vm.backToGuru()"
+               ng-href="#/tab/guru/whosefault" >В начало</a>
         </div>
     </ion-content>
 </ion-view>

@@ -1,3 +1,4 @@
+<!--
 <ion-view view-title="Авторизация" ng-controller="SignInCtrl as vm">
     <ion-content>
         <div class="list">
@@ -14,9 +15,53 @@
             <button class="button button-block button-positive" ng-click="vm.login(vm.user)">
                 Войти
             </button>
-            <!--<p class="text-center">
+            &lt;!&ndash;<p class="text-center">
                 <a href="#/forgot-password">забыли пароль?</a>
-            </p>-->
+            </p>&ndash;&gt;
+        </div>
+    </ion-content>
+</ion-view>-->
+
+<ion-view ng-controller="SignInCtrl as vm">
+    <ion-content class="content padding">
+        <div class="row responsive-sm">
+            <div class="col logo">
+                <img src="img/dashboard-icon.png">
+            </div>
+        </div>
+        <!--<div class="row responsive-sm">
+          <div class="col signin-lock">
+            Sign-In <i class="icon ion-ios-locked"></i>
+          </div>
+        </div>-->
+        <div class="row responsive-sm">
+            <div class="col">
+                <div ng-show="login.error" class="login-error">{{login.error}}</div>
+            </div>
+        </div>
+
+        <div class="login-wrapper">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="login input-label"><i class="icon ion-person"></i></span>
+                    <input type="text" ng-model="vm.user.username" required>
+                </label>
+                <label class="item item-input">
+                    <span class="login input-label"><i class="icon ion-locked"></i></span>
+                    <input type="password" ng-model="vm.user.password" required>
+                </label>
+            </div>
+
+            <div class="padding">
+                <button class="button button-block button-login"
+                        ng-class="{'m-progress': login.dataLoading}"
+                        ng-click="vm.login(vm.user)">
+                    Войти
+                </button>
+                <p class="text-center">
+                    <a href="#/forgot-password" class="forgot-password">Забыли пароль?</a>
+                </p>
+            </div>
         </div>
     </ion-content>
 </ion-view>

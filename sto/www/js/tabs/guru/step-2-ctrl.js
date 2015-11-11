@@ -6,10 +6,10 @@ angular
     .module('STO')
     .controller('Step2millage', Step2millage);
 
-Step2millage.$inject = ['guruinfo', 'currentUser', 'formEncode', 'setMilage'];
+Step2millage.$inject = ['currentUser', 'formEncode', 'Guru', '$scope'];
 
 /* @ngInject */
-function Step2millage(guruinfo, currentUser, formEncode, setMilage) {
+function Step2millage(currentUser, formEncode, Guru, $scope) {
     /* jshint validthis: true */
     var vm = this,
         currentUserInfo = {};
@@ -25,24 +25,35 @@ function Step2millage(guruinfo, currentUser, formEncode, setMilage) {
     ////////////////
 
     function activate() {
-        getUserProfile()
-            .then(getUserAuto())
+       getUserAuto();
+        Guru.setGuruInfo({
+            userGlobalDefectTypes: null,
+            userDefect: null,
+            context_id: null,
+            context_scale_id: null,
+            results: {}
+        })
+
     }
+
+    $scope.$on("$ionicView.enter", function() {
+        activate()
+    });
 
     /**
      * Сохраняет пробег пользователя
      */
     function setMillage() {
-        var obj = formEncode.encode({
-            session_id: currentUserInfo.session_key,
-            account_id: currentUserInfo.account_id,
-            milage: vm.userAuto.distance,
-            curTsId: vm.userAuto.id,
-            curTsIndex: 0
-        });
-        setMilage.setMilagePost(obj).then(function(response){
-            console.log(response);
-        })
+        // cохранили в гуру пробег введенный пользователем
+        Guru.setMilage(vm.userAuto.distance);
+        // очищает другие поля
+        /*Guru.setGuruInfo({
+            userGlobalDefectTypes: null,
+            userDefect: null,
+            context_id: null,
+            context_scale_id: null,
+            results: ''
+        })*/
     }
 
     /**
@@ -50,20 +61,9 @@ function Step2millage(guruinfo, currentUser, formEncode, setMilage) {
      * @returns {*}
      */
     function getUserAuto() {
-        return guruinfo.getUserAuto().then(function(response){
-            vm.userAuto = response;
+        return Guru.getGuruInfo().then(function(response){
+            vm.userAuto = response.auto;
             return vm.userAuto;
-        })
-    }
-
-    /**
-     * Запрашивает профиль пользователя
-     * @returns {*}
-     */
-    function getUserProfile() {
-        return currentUser.getProfile().then(function(response) {
-            currentUserInfo = response;
-            return currentUserInfo;
         })
     }
 

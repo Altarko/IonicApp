@@ -23,13 +23,13 @@
 
                 <div class="item item-avatar  item-icon-right" >
                     <img src="img/sto.png">
-                    <h2>{{sto.title}}</h2>
-                    <p>{{sto.address}}</p>
-                    <a class="button button-icon icon icon ion-location" ng-click="vm.openGeo(sto.coord.lat, sto.coord.long)"></a>
+                    <h2>{{sto.sto_name}}</h2>
+                    <p>{{sto.sto_addr}}</p>
+                    <a class="button button-icon icon icon ion-location" ng-click="vm.openGeo(sto.sto_lat, sto.sto_lon)"></a>
                     <!--<a href="geo:37.786971,-122.399677;u=35"><i class="icon ion-location"></i></a>-->
                 </div>
 
-                <div class="item item-body">
+                <!--<div class="item item-body">
                     <p>
                         {{sto.about}}
                     </p>
@@ -48,7 +48,7 @@
                         <i class="icon ion-chatbubble-working"></i>
                         Написать
                     </a>
-                </div>
+                </div>-->
 
             </div>
         </ion-list>

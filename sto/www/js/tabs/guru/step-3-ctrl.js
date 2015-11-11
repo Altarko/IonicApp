@@ -5,10 +5,10 @@ angular
     .module('STO')
     .controller('Step3Defecttypes', Step3Defecttypes);
 
-Step3Defecttypes.$inject = ['DefectTypes', 'guruinfo'];
+Step3Defecttypes.$inject = ['Guru', '$scope'];
 
 /* @ngInject */
-function Step3Defecttypes(DefectTypes, guruinfo) {
+function Step3Defecttypes(Guru, $scope) {
     /* jshint validthis: true */
     var vm = this;
 
@@ -25,15 +25,21 @@ function Step3Defecttypes(DefectTypes, guruinfo) {
     function activate() {
         getDefectTypes().then(function(){
             // по умолчанию устанавливаем в селекте первый тип неисправности
-            vm.userDefectType= vm.defectTypes[0];
+            vm.userDefectType = vm.defectTypes[0];
         });
+        Guru.setGuruInfo({
+            userDefect: null,
+            context_id: null,
+            context_scale_id: null,
+            results: {}
+        })
     }
 
     /**
      * Запрашивает типы неисправностей
      */
     function getDefectTypes() {
-        return DefectTypes.getTypes().then(function(response) {
+        return Guru.getGlobalDefectTypes().then(function(response) {
             vm.defectTypes = response;
             return vm.defectTypes;
         })
@@ -44,7 +50,15 @@ function Step3Defecttypes(DefectTypes, guruinfo) {
      * @constructor
      */
     function DefectTypeSelected() {
-        guruinfo.setUserDefectType(vm.userDefectType);
+        Guru.setGuruInfo({
+            userGlobalDefectTypes: vm.userDefectType.id
+        });
+        /*Guru.setGuruInfo({
+            //userDefect: null,
+            context_id: null,
+            context_scale_id: null,
+            results: {}
+        })*/
     }
 
 }

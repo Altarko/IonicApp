@@ -2,10 +2,10 @@ angular
     .module('STO')
     .factory('auth', auth);
 
-auth.$inject = ['$http', 'formEncode', 'currentUser'];
+auth.$inject = ['$http', 'formEncode', 'currentUser', 'Guru'];
 
 /* @ngInject */
-function auth($http, formEncode, currentUser) {
+function auth($http, formEncode, currentUser, Guru) {
 
     var url = 'http://80.78.244.190:8080';
 
@@ -38,6 +38,11 @@ function auth($http, formEncode, currentUser) {
         function loginComplete(response) {
             console.log(response);
             currentUser.setProfile(user.username, response.data);
+            console.log(response.data);
+            Guru.setGuruInfo({
+                session_key: response.data.session_key,
+                account_id: response.data.account_id
+            });
             return response;
         }
 

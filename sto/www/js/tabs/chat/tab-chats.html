@@ -1,0 +1,46 @@
+<ion-view view-title="Чат" ng-controller="ChatCtrl as chat">
+  <ion-content>
+    <ion-list ng-if="!chat.showPoll">
+      <ion-item class="item-remove-animate item-avatar item-icon-right"
+                ng-repeat="sto in chat.stoList "
+                type="item-text-wrap"
+                href="#/tab/chats/{{sto.sto_id}}"
+              ng-click="chat.getMessages(sto)">
+        <img src="img/sto.png">
+        <h2>{{sto.sto_name}}</h2>
+        <p>{{sto.sto_addr}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(chat)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+
+      <div ng-if="chat.showPoll">
+          <div class="list list-inset">
+              <label class="item item-input item-select">
+                  <div class="input-label">
+                      Выберите машину:
+                  </div>
+                  <select ng-options="auto as auto.gos_numb for auto in chat.autos" ng-model="chat.userAuto">
+                  </select>
+              </label>
+          </div>
+
+          <div class="list list-inset">
+              <h5>Пробег Вашего автомобиля:</h5>
+              <label class="item item-input">
+                  <input type="number" placeholder="В километрах" ng-model="chat.userAuto.distance">
+              </label>
+          </div>
+
+          <div class="button-bar">
+              <a class="button button-balanced"
+                 ng-class="{'disabled': !chat.userAuto.id}"
+                 ng-click="chat.pollDone()">Далее</a>
+          </div>
+      </div>
+
+  </ion-content>
+</ion-view>

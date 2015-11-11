@@ -12,12 +12,16 @@ guruinfo.$inject = ['$q'];
 function guruinfo($q) {
 
     var guruInfo = {
-        results: {}
+        auto: {},               // выбранный пользователем автомобиль
+        results: {},
+        millage: 0
     };
 
     var service = {
         setUserAuto: setUserAuto,
         getUserAuto: getUserAuto,
+
+        setUserMillage: setUserMillage,
 
         setUserDefectType: setUserDefectType,
         getUserDefectType: getUserDefectType,
@@ -67,5 +71,9 @@ function guruinfo($q) {
 
     function getGuruResult() {
         return $q.when(guruInfo.results);
+    }
+
+    function setUserMillage(millage) {
+        guruInfo.millage = millage;
     }
 }

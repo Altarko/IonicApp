@@ -33,6 +33,7 @@ angular.module('STO', ['ionic', 'starter.controllers', 'starter.services', 'ngCo
 
     .config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
+        $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
     }])
 
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -107,6 +108,25 @@ angular.module('STO', ['ionic', 'starter.controllers', 'starter.services', 'ngCo
                 }
             })
 
+
+            .state('tab.guru-step5', {
+                url: '/guru/step5',
+                views: {
+                    'tab-guru': {
+                        templateUrl: 'js/tabs/guru/tab-step-5-contexts.html'
+                    }
+                }
+            })
+
+            .state('tab.guru-step6', {
+                url: '/guru/step6',
+                views: {
+                    'tab-guru': {
+                        templateUrl: 'js/tabs/guru/tab-step-6-contextscales.html'
+                    }
+                }
+            })
+
             .state('tab.guru-owner', {
                 url: '/guru/owner',
                 views: {
@@ -127,7 +147,6 @@ angular.module('STO', ['ionic', 'starter.controllers', 'starter.services', 'ngCo
                 }
             })
 
-            // ?????????? ???????????
             .state('tab.guru-result', {
                 url: '/guru/result',
                 views: {
@@ -136,6 +155,7 @@ angular.module('STO', ['ionic', 'starter.controllers', 'starter.services', 'ngCo
                     }
                 }
             })
+
 
             .state('tab.guru-evacuators', {
                 url: '/guru/evacuators',
@@ -151,8 +171,8 @@ angular.module('STO', ['ionic', 'starter.controllers', 'starter.services', 'ngCo
                 url: '/chats',
                 views: {
                     'tab-chats': {
-                        templateUrl: 'templates/tab-chats.html',
-                        controller: 'ChatsCtrl'
+                        templateUrl: 'js/tabs/chat/tab-chats.html',
+                        controller: 'ChatCtrl'
                     }
                 }
             })
@@ -217,7 +237,7 @@ angular.module('STO', ['ionic', 'starter.controllers', 'starter.services', 'ngCo
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/welcome');
+        $urlRouterProvider.otherwise('/sign-in');
 
     })
 

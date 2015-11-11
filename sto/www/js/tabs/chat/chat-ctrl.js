@@ -2,81 +2,100 @@ angular
     .module('STO')
     .controller('ChatCtrl', ChatCtrl);
 
-ChatCtrl.$inject = ['$scope', 'autoservices', '$timeout', '$ionicScrollDelegate'];
 
 /* @ngInject */
-function ChatCtrl($scope, autoservices, $timeout, $ionicScrollDelegate) {
+function ChatCtrl($scope, Guru, Chat, Sto, userautos) {
     /* jshint validthis: true */
 
     var vm = this;
 
+    vm.stoList = [];
+
+    vm.activeCto = {};
+    vm.millage = 0;
+    vm.services = [];
+    //vm.messages = [];
+    vm.guruInfo = {};
+    vm.showPoll = false;
+    vm.pollDone = pollDone;
+    vm.userAuto = [];
+
     activate();
 
-    vm.hideTime = false;
-
-    var alternate,
-        isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
-
-    vm.sendMessage = function () {
-        alternate = !alternate;
-
-        var d = new Date();
-        d = d.toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-
-        vm.messages.push({
-            userId: alternate ? '12345' : '54321',
-            text: vm.data.message,
-            time: d
-        });
-
-        console.log(vm.messages);
-        delete vm.data.message;
-        $ionicScrollDelegate.scrollBottom(true);
-
-    };
-
-
-    vm.inputUp = function () {
-        if (isIOS) vm.data.keyboardHeight = 216;
-        $timeout(function () {
-            $ionicScrollDelegate.scrollBottom(true);
-        }, 300);
-
-    };
-
-    vm.inputDown = function () {
-        if (isIOS) vm.data.keyboardHeight = 0;
-        $ionicScrollDelegate.resize();
-    };
-
-    $scope.closeKeyboard = function () {
-        // cordova.plugins.Keyboard.close();
-    };
-
-
-    vm.data = {};
-    vm.myId = '12345';
-    vm.messages = [{
-        text: "Test 1",
-        time: "16:53",
-        userId: "12345"
-    },
-        {
-            text: "Test 2",
-            time: "16:53",
-            userId: "54321"
-        },
-        {
-            text: "Test 3",
-            time: "16:53",
-            userId: "12345"
-        }];
-
-
-    ////////////////
+////////////////
 
     function activate() {
+        getGuruInfo().then(function(guruInfo){
+            console.log(guruInfo);
+            if (!guruInfo.auto.id) {
+                vm.showPoll = true;
+                getAutos().then(function(){
+                    // устанавливаем выбранным элементом первый из доступных автомобилей
+                    vm.userAuto = vm.autos[0];
+                })
+            } else {
+                getStoList();
+            }
+        });
+
+        //console.log('activate');
+        /*getMillage().then(function (millage) {
+            //console.log();
+            if (millage !== 0) {
+                getLongPoll();
+            }
+        })*/
     }
 
+    function getMillage() {
+        return Guru.getGuruInfo().then(function (response) {
+            vm.millage = response.millage;
+            return vm.millage;
+        })
+    }
+
+    function getLongPoll() {
+        return Chat.getLongPoll().then(function (response) {
+            vm.services = response;
+            console.log(response);
+            return vm.services;
+        })
+    }
+
+    function getStoList() {
+        return Sto.getStoList().then(function(response) {
+            vm.stoList = response;
+            console.log(response);
+            return vm.stoList;
+        })
+    }
+
+    function getGuruInfo() {
+        return Guru.getGuruInfo().then(function(response) {
+            console.log(response);
+            vm.guruInfo = response;
+            return vm.guruInfo;
+        })
+    }
+
+    function pollDone() {
+        vm.showPoll = false;
+        var info = {
+            auto: vm.userAuto
+        };
+        Guru.setGuruInfo(info);
+        Guru.setMilage(vm.userAuto.distance);
+        getStoList();
+    }
+
+    /**
+     * Запрос автомобилей пользователя
+     */
+    function getAutos() {
+        return userautos.getAutos().then(function(response) {
+            vm.autos = response;
+            return vm.autos;
+        })
+    }
 
 }

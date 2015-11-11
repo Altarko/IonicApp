@@ -5,10 +5,10 @@ angular
     .module('STO')
     .controller('Step1autoSelect', Step1autoSelect);
 
-Step1autoSelect.$inject = ['userautos', 'guruinfo'];
+Step1autoSelect.$inject = ['userautos', 'Guru'];
 
 /* @ngInject */
-function Step1autoSelect(userautos, guruinfo) {
+function Step1autoSelect(userautos, Guru) {
     /* jshint validthis: true */
     var vm = this;
 
@@ -43,7 +43,11 @@ function Step1autoSelect(userautos, guruinfo) {
      * Сохранение выбранного пользователем автомобиля
      */
     function autoSelected() {
-        guruinfo.setUserAuto(vm.userAuto);
+        var info = {
+            auto: vm.userAuto
+        };
+        Guru.setGuruInfo(info);
+        //guruinfo.setUserAuto(vm.userAuto);
     }
 
 

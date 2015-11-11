@@ -6,6 +6,7 @@ setMilage.$inject = ['$http', 'config'];
 
 /* @ngInject */
 function setMilage($http, config) {
+
     var service = {
         setMilagePost: setMilagePost
     };
@@ -18,19 +19,16 @@ function setMilage($http, config) {
         return $http({
             url: config.url + '/ctoweb/rest/get_entities/set_milage',
             method: "POST",
-            //withCredentials: true,
             data: dataPost,
             headers: {
                 'Content-Type' :'application/x-www-form-urlencoded; charset=UTF-8',
-                'Accept': '*/*'/*,
-                 'Set-Cookies': 'JSESSIONID=b80dce131dad765177f0e45110e1'*/
+                'Accept': '*/*'
             }
         })
             .then(getMComplete)
             .catch(getMFailed);
 
         function getMComplete(response) {
-            //autos = response.data.data;
             return (response.data);
         }
 
