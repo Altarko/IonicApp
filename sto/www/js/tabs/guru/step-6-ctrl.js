@@ -15,6 +15,7 @@ function Step6ContextScales(Guru, $scope) {
     vm.defectContextScales = [];
     vm.guruResults = '';
     vm.contextScalesSelected = contextScalesSelected;
+    vm.nextStep = nextStep;
 
     activate();
 
@@ -81,6 +82,35 @@ function Step6ContextScales(Guru, $scope) {
         setUserProb().then(function () {
             // тащим ответ по диагностике
             return Guru.getNewQuestion().then(function (response) {
+                vm.guruResults = response;
+                return vm.guruResults;
+            })
+        })
+    }
+
+    function next() {
+        return Guru.setUserProblem('6-next').then(function (response) {
+            return response;
+        })
+    }
+
+    function nextStep() {
+        Guru.setGuruInfo({
+            results: {}
+        });
+        vm.redirectUrl = 'result';
+        console.log('запрашиваем результат');
+        next().then(function () {
+            // тащим ответ по диагностике
+            return Guru.getNewQuestion().then(function (response) {
+                vm.guruResults = response;
+                console.log(response);
+                if (response.msg) {
+                    console.log('Конец!');
+                    vm.redirectUrl = 'result';
+                } else {
+                    vm.redirectUrl = 'yes-no';
+                }
                 vm.guruResults = response;
                 return vm.guruResults;
             })

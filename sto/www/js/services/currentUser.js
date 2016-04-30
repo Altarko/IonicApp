@@ -10,7 +10,7 @@ function currentUser($q) {
     var profile = {
         username: '',
         account_id: '',
-        session_key: '',
+        session_id: '',
         get loggedIn() {
             return this.account_id
         }
@@ -29,7 +29,7 @@ function currentUser($q) {
     function setProfile(username, data) {
         profile.username = username;
         profile.account_id = data.account_id;
-        profile.session_key = data.session_key;
+        profile.session_id = data.session_id;
         console.log(profile);
     }
 

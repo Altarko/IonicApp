@@ -1,0 +1,16 @@
+<ion-view view-title="" ng-controller="YesNo as vm">
+    <ion-content>
+        <div class="list list-inset">
+            У вас наблюдается {{vm.guruInfo.results.data2[0].name}}
+        </div>
+        <div class="button-bar">
+            <a class="button button-balanced" ng-click="vm.setAnswer('YES')">Да</a>
+            <a class="button button-balanced" ng-click="vm.setAnswer('NO')">Нет</a>
+        </div>
+        <br>
+        <div class="button-bar">
+            <a class="button" ng-click="vm.setAnswer('SKIP')">Пропустить</a>
+        </div>
+
+    </ion-content>
+</ion-view>

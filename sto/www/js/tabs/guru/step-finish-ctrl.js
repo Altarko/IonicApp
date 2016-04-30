@@ -26,7 +26,7 @@ function StepFinishCtrl(Guru, $ionicNavBarDelegate, $scope) {
 
     function getGuruResult() {
         return Guru.getGuruInfo().then(function (response) {
-            vm.results = response.results;
+            vm.results = response.results.data2[0];
             console.log(response);
             return vm.results;
         })

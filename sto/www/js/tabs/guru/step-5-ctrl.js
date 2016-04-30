@@ -14,6 +14,7 @@ function Step5Context(Guru, $scope) {
     vm.defectContext = [];
     vm.guruResults = {};
     vm.redirectUrl = '';
+    vm.nextStep = nextStep;
 
     activate();
 
@@ -40,7 +41,7 @@ function Step5Context(Guru, $scope) {
     function getContext() {
         return Guru.getContexts().then(function (response) {
             vm.defectContext = response;
-            //console.log(vm.defectContext);
+            console.log(vm.defectContext);
             return vm.defectContext;
         })
     }
@@ -49,6 +50,25 @@ function Step5Context(Guru, $scope) {
     function setUserProb() {
         return Guru.setUserProblem('5').then(function (response) {
             return response;
+        })
+    }
+
+    function next() {
+        return Guru.setUserProblem('5-next').then(function (response) {
+            return response;
+        })
+    }
+
+    function nextStep() {
+        console.log('next-ctrl');
+        vm.redirectUrl = 'result';
+        console.log('запрашиваем результат');
+        next().then(function () {
+            // тащим ответ по диагностике
+            return Guru.getNewQuestion().then(function (response) {
+                vm.guruResults = response;
+                return vm.guruResults;
+            })
         })
     }
 
@@ -101,6 +121,13 @@ function Step5Context(Guru, $scope) {
                     setUserProb().then(function () {
                         // тащим ответ по диагностике
                         return Guru.getNewQuestion().then(function (response) {
+                            console.log(response);
+                            if (response.msg) {
+                                console.log('Конец!');
+                                vm.redirectUrl = 'result';
+                            } else {
+                                vm.redirectUrl = 'yes-no';
+                            }
                             vm.guruResults = response;
                             return vm.guruResults;
                         })

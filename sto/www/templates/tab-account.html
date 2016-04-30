@@ -7,38 +7,38 @@
             <ion-item class="item-divider">
                 Мои данные
             </ion-item>
-            <ion-item>
+            <ion-item ng-if="vm.userInfo.account_surname || vm.userInfo.account_name || vm.userInfo.account_patronymic">
                 <p><span class="item-note-left">ФИО</span></p>
-                Иванов Иван Иванович
+                {{vm.userInfo.account_surname}} {{vm.userInfo.account_name}} {{vm.userInfo.account_patronymic}}
             </ion-item>
-            <ion-item>
+            <ion-item ng-if="vm.userInfo.login">
                 <p><span class="item-note-left">email</span></p>
-                example@mail.ru
+                {{vm.userInfo.login}}
             </ion-item>
-            <ion-item>
+            <ion-item ng-if="vm.userInfo.nick">
                 <p><span class="item-note-left">Ник</span></p>
-               Nickname
+                {{vm.userInfo.nick}}
             </ion-item>
-            <ion-item>
+            <ion-item ng-if="vm.userInfo.contact_name && vm.userInfo.contact_name !== 'empty'">
                 <p><span class="item-note-left">Контактное лицо</span></p>
-               Иванов Иван Иванович
+                {{vm.userInfo.contact_name}}
             </ion-item>
-            <ion-item>
+            <ion-item ng-if="vm.userInfo.fact_addr && vm.userInfo.fact_addr !== 'empty'">
                 <p><span class="item-note-left">Физический адрес</span></p>
-                г. Москва, ул. Мира 14 д. 54
+                {{vm.userInfo.fact_addr}}
             </ion-item>
-            <ion-item>
+            <ion-item ng-if="vm.userInfo.jure_addr && vm.userInfo.jure_addr !== 'empty'">
                 <p><span class="item-note-left">Юридический адрес</span></p>
-                г. Нижний Новогород, ул. Парковая д. 14 оф. 1
+                {{vm.userInfo.jure_addr}}
             </ion-item>
             <!--<ion-item class="item-icon-left">
                 <i class="icon ion-home"></i>
                 Юридический адрес
                 <p><span class="item-note">г. Нижний Новогород, ул. Парковая д. 14 оф. 1</span></p>
             </ion-item>-->
-            <ion-item>
+            <ion-item ng-if="vm.userInfo.discount">
                 <p><span class="item-note-left">Скидка</span></p>
-                12%
+                {{vm.userInfo.discount}}
             </ion-item>
 
             <ion-item class="item-divider">

@@ -40,7 +40,7 @@ function auth($http, formEncode, currentUser, Guru) {
             currentUser.setProfile(user.username, response.data);
             console.log(response.data);
             Guru.setGuruInfo({
-                session_key: response.data.session_key,
+                session_id: response.data.session_id,
                 account_id: response.data.account_id
             });
             return response;

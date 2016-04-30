@@ -12,7 +12,7 @@ Guru.$inject = ['$http', '$q', 'addData', 'config', 'formEncode'];
 function Guru($http, $q, addData, config, formEncode) {
 
     var guruInfo = {
-        session_key: null,
+        session_id: null,
         account_id: null,
         auto: {},                           // выбранный пользователем автомобиль
         userGlobalDefectTypes: {},          // тип неисправности (авто или владелец)
@@ -35,7 +35,8 @@ function Guru($http, $q, addData, config, formEncode) {
         getContextScales: getContextScales,
         setUserProblem: setUserProblem,
         getNewQuestion: getNewQuestion,
-        getNewSession: getNewSession
+        getNewSession: getNewSession,
+        getNewQuestionYesNo: getNewQuestionYesNo
     };
 
     return service;
@@ -87,7 +88,7 @@ function Guru($http, $q, addData, config, formEncode) {
         guruInfo.millage = milage;
 
         var dataPost = formEncode.encode({
-            session_id: guruInfo.session_key,
+            session_id: guruInfo.session_id,
             account_id: guruInfo.account_id,
             milage: guruInfo.millage,
             curTsId: guruInfo.auto.id,
@@ -122,7 +123,7 @@ function Guru($http, $q, addData, config, formEncode) {
     function getDefectsList() {
 
         var dataPost = formEncode.encode({
-            session_id: guruInfo.session_key,
+            session_id: guruInfo.session_id,
             account_id: guruInfo.account_id,
             defect_type_id: guruInfo.userGlobalDefectTypes
         });
@@ -157,7 +158,7 @@ function Guru($http, $q, addData, config, formEncode) {
         //guruInfo.userDefect = userDefectId;
 
         var dataPost = formEncode.encode({
-            session_id: guruInfo.session_key,
+            session_id: guruInfo.session_id,
             account_id: guruInfo.account_id,
             defect_id: guruInfo.userDefect
         });
@@ -196,7 +197,7 @@ function Guru($http, $q, addData, config, formEncode) {
         switch (step) {
             case '4':
                 dataPost = formEncode.encode({
-                    session_id: guruInfo.session_key,
+                    session_id: guruInfo.session_id,
                     account_id: guruInfo.account_id,
                     defect_id: guruInfo.userDefect,
                     curTsId: guruInfo.auto.id
@@ -204,7 +205,7 @@ function Guru($http, $q, addData, config, formEncode) {
                 break;
             case '5':
                 dataPost = formEncode.encode({
-                    session_id: guruInfo.session_key,
+                    session_id: guruInfo.session_id,
                     account_id: guruInfo.account_id,
                     defect_id: guruInfo.userDefect,
                     context_id: guruInfo.context_id,
@@ -213,11 +214,30 @@ function Guru($http, $q, addData, config, formEncode) {
                 break;
             case '6':
                 dataPost = formEncode.encode({
-                    session_id: guruInfo.session_key,
+                    session_id: guruInfo.session_id,
                     account_id: guruInfo.account_id,
                     defect_id: guruInfo.userDefect,
                     context_id: guruInfo.context_id,
                     context_scale_id: guruInfo.context_scale_id,
+                    curTsId: guruInfo.auto.id
+                });
+                break;
+            case '5-next':
+                console.log('next-service');
+                dataPost = formEncode.encode({
+                    session_id: guruInfo.session_id,
+                    account_id: guruInfo.account_id,
+                    defect_id: guruInfo.userDefect,
+                    curTsId: guruInfo.auto.id
+                });
+                break;
+
+            case '6-next':
+                dataPost = formEncode.encode({
+                    session_id: guruInfo.session_id,
+                    account_id: guruInfo.account_id,
+                    defect_id: guruInfo.userDefect,
+                    context_id: guruInfo.context_id,
                     curTsId: guruInfo.auto.id
                 });
                 break;
@@ -254,7 +274,7 @@ function Guru($http, $q, addData, config, formEncode) {
 
         var dataPost = formEncode.encode({
             account_id: guruInfo.account_id,
-            session_key: guruInfo.session_key
+            session_id: guruInfo.session_id
         });
 
         return $http({
@@ -271,8 +291,43 @@ function Guru($http, $q, addData, config, formEncode) {
 
         function getMComplete(response) {
             //console.log(response.data.data2[0]);
-            guruInfo.results = response.data.data2[0];
-            return (response.data.data2[0]);
+            guruInfo.results = response.data;
+            return (response.data);
+        }
+
+        function getMFailed(error) {
+            return (error.data = 'Ошибка получения ответа по диагностике');
+        }
+    }
+
+    /**
+     * Результаты диагностики (Да-нет)
+     */
+
+    function getNewQuestionYesNo(answer) {
+
+        var dataPost = formEncode.encode({
+            account_id: guruInfo.account_id,
+            session_id: guruInfo.session_id,
+            ansType: answer
+        });
+
+        return $http({
+            url: config.url + '/ctoweb/rest/get_entities/get_new_question',
+            method: "POST",
+            data: dataPost,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Accept': '*/*'
+            }
+        })
+            .then(getMComplete)
+            .catch(getMFailed);
+
+        function getMComplete(response) {
+            //console.log(response.data.data2[0]);
+            guruInfo.results = response.data;
+            return (response.data);
         }
 
         function getMFailed(error) {
@@ -286,7 +341,7 @@ function Guru($http, $q, addData, config, formEncode) {
     function getContextScales() {
 
         var dataPost = formEncode.encode({
-            session_id: guruInfo.session_key,
+            session_id: guruInfo.session_id,
             account_id: guruInfo.account_id,
             context_id: guruInfo.context_id
         });
@@ -318,7 +373,7 @@ function Guru($http, $q, addData, config, formEncode) {
 
     function getNewSession() {
         var dataPost = formEncode.encode({
-            session_id: guruInfo.session_key,
+            session_id: guruInfo.session_id,
             account_id: guruInfo.account_id
         });
         return $http({
@@ -335,7 +390,7 @@ function Guru($http, $q, addData, config, formEncode) {
 
 
         function getNSComplete(response) {
-            guruInfo.session_key = Number(response.data.sessionKey);
+            guruInfo.session_id = Number(response.data.sessionId);
             console.log(guruInfo);
             return (response);
         }

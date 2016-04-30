@@ -156,6 +156,15 @@ angular.module('STO', ['ionic', 'starter.controllers', 'starter.services', 'ngCo
                 }
             })
 
+            .state('tab.yes-no', {
+                url: '/guru/yes-no',
+                views: {
+                    'tab-guru': {
+                        templateUrl: 'js/tabs/guru/yes-no.html'
+                    }
+                }
+            })
+
 
             .state('tab.guru-evacuators', {
                 url: '/guru/evacuators',

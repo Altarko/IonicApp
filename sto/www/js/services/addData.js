@@ -22,7 +22,7 @@ function addData(currentUser, formEncode) {
         // ???? ???????????? ???????????
         if (currentUser.profile.loggedIn) {
             var data = formEncode.encode({
-                session_id: currentUser.profile.session_key,
+                session_id: currentUser.profile.session_id,
                 account_id: currentUser.profile.account_id
             });
         }

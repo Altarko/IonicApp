@@ -3,14 +3,14 @@
         <div class="list list-inset">
             <label class="item item-input item-select">
                 <div class="input-label">
-                    Тип неисправности:
+                    Неисправность
                 </div>
                 <select ng-options="defect as defect.name for defect in vm.defects" ng-model="vm.userDefect">
                 </select>
             </label>
         </div>
         <div class="button-bar">
-            <a class="button">Пропустить</a>
+           <!-- <a class="button">Пропустить</a>-->
             <a class="button button-balanced"
                ng-class="{'disabled': !vm.userDefect.id}"
                ng-href="#/tab/guru/{{vm.redirectUrl}}" >Далее</a>

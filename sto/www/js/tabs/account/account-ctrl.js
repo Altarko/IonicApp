@@ -2,12 +2,13 @@ angular
     .module('STO')
     .controller('AccountCtrl', AccountCtrl);
 
-AccountCtrl.$inject = ['userautos', '$state', 'Guru'];
 
 /* @ngInject */
-function AccountCtrl(userautos, $state, Guru) {
+function AccountCtrl(userautos, $state, Guru, Account) {
     /* jshint validthis: true */
     var vm = this;
+    vm.userInfo = {};
+
     activate();
     vm.userAutos = [];                      // ?????? ??????????? ????????????
     vm.backToGuru = backToGuru;
@@ -16,10 +17,11 @@ function AccountCtrl(userautos, $state, Guru) {
 
     function activate() {
         getUserAutos();
+        getAccInfo();
     }
 
     function getUserAutos() {
-        return userautos.getAutos().then(function(response){
+        return userautos.getAutos().then(function (response) {
             vm.userAutos = response;
             console.log(response);
             return vm.userAutos;
@@ -38,6 +40,13 @@ function AccountCtrl(userautos, $state, Guru) {
         return Guru.getNewSession();
     }
 
+    function getAccInfo() {
+        return Account.getAccountInfo().then(function (response) {
+            console.log(response);
+            vm.userInfo = response[0];
+            return vm.userInfo;
+        })
+    }
 
 
 }

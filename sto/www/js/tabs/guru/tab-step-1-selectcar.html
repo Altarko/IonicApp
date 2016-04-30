@@ -1,16 +1,16 @@
-<ion-view view-title="Автомобиль" ng-controller="Step1autoSelect as vm">
+<ion-view view-title="Выберите машину" ng-controller="Step1autoSelect as vm">
     <ion-content>
         <div class="list list-inset">
             <label class="item item-input item-select">
                 <div class="input-label">
-                    Выберите машину:
+                    Автомобиль:
                 </div>
                 <select ng-options="auto as auto.gos_numb for auto in vm.autos" ng-model="vm.userAuto">
                 </select>
             </label>
         </div>
         <div class="button-bar">
-            <a class="button">Пропустить</a>
+           <!-- <a class="button">Пропустить</a>-->
             <a class="button button-balanced"
                ng-class="{'disabled': !vm.userAuto.id}"
                href="#/tab/guru/km" ng-click="vm.autoSelected()">Далее</a>

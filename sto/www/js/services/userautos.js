@@ -34,6 +34,7 @@ function userautos($http, $q, addData, config) {
         // или запрашиваем
         } else {
             var dataPost = addData.addData();
+            console.log(dataPost);
             return $http({
                 url: config.url + '/ctoweb/rest/get_entities/get_ts',
                 method: "POST",

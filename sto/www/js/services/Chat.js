@@ -34,10 +34,10 @@ function Chat($http, $q, addData, config, formEncode, currentUser, Sto) {
 
     function getLongPoll() {
         var dataPost = formEncode.encode({
-            session_id: currentUser.profile.session_key,
+            session_id: currentUser.profile.session_id,
             account_id: currentUser.profile.account_id,
             region_id: 9,
-            cto_list: Sto.getStoList()
+            cto_list: JSON.stringify(Sto.getStoConvertedList())
         });
         return $http({
             url: config.url + '/ctoweb/rest/get_entities/get_long_poll',
@@ -52,7 +52,7 @@ function Chat($http, $q, addData, config, formEncode, currentUser, Sto) {
             .catch(getDFailed);
 
         function getDComplete(response) {
-            return response.data;
+            return response.data.data[0];
         }
 
         function getDFailed(error) {
@@ -62,7 +62,7 @@ function Chat($http, $q, addData, config, formEncode, currentUser, Sto) {
 
     function getMessages(cto_id) {
         var dataPost = formEncode.encode({
-            session_id: currentUser.profile.session_key,
+            session_id: currentUser.profile.session_id,
             account_id: currentUser.profile.account_id,
             cto_id: cto_id,
             upToDate: null
@@ -90,7 +90,7 @@ function Chat($http, $q, addData, config, formEncode, currentUser, Sto) {
 
     function sendText(data) {
         var dataPost = formEncode.encode({
-            session_id: currentUser.profile.session_key,
+            session_id: currentUser.profile.session_id,
             account_id: currentUser.profile.account_id,
             sto_id: data.sto_id,
             cur_ts_id: data.cur_ts_id,

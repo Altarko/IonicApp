@@ -1,16 +1,16 @@
-<ion-view view-title="Неисправность" ng-controller="Step6ContextScales as vm">
+<ion-view view-title="Контекст неисправности" ng-controller="Step6ContextScales as vm">
     <ion-content>
         <div class="list list-inset">
             <label class="item item-input item-select">
                 <div class="input-label">
-                    Контекст неисправности:
+                    Контекст
                 </div>
                 <select ng-options="defect as defect.name for defect in vm.defectContextScales" ng-model="vm.userDefectContextScales">
                 </select>
             </label>
         </div>
         <div class="button-bar">
-            <a class="button">Пропустить</a>
+            <a class="button" ng-click="vm.nextStep()" ng-href="#/tab/guru/{{vm.redirectUrl}}">Пропустить</a>
             <a class="button button-balanced"
                ng-class="{'disabled': !vm.userDefectContextScales.id}"
                ng-href="#/tab/guru/{{vm.redirectUrl}}"

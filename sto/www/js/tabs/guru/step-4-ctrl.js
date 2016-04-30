@@ -112,6 +112,13 @@ function Step4Defects(Guru, $scope) {
                         // тащим ответ по диагностике
                         return Guru.getNewQuestion().then(function (response) {
                             vm.guruResults = response;
+                            if (response.msg) {
+                                console.log('Конец!');
+                                vm.redirectUrl = 'result';
+                            } else {
+                                console.log('Да-нет');
+                                vm.redirectUrl = 'yes-no';
+                            }
                             //console.log(vm.guruResults);
                             return vm.guruResults;
                         })

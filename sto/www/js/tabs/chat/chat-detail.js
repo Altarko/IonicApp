@@ -5,7 +5,7 @@ angular
 //ChatDetailCtrl.$inject = ['$scope', '$timeout', '$ionicScrollDelegate', 'Chat', '$stateParams', 'Guru'];
 
 /* @ngInject */
-function ChatDetailCtrl($scope, $timeout, $ionicScrollDelegate, Chat, $stateParams, Guru) {
+function ChatDetailCtrl($scope, $timeout, $ionicScrollDelegate, Chat, $stateParams, Guru, $interval, Sto) {
     /* jshint validthis: true */
 
     var vm = this;
@@ -42,6 +42,11 @@ function ChatDetailCtrl($scope, $timeout, $ionicScrollDelegate, Chat, $statePara
     vm.myId = null;
     vm.messages = [];
     vm.guruInfo = {};
+    vm.stoList = [];
+
+    var stoConvertedList = {};
+
+    var interval;
 
     activate();
 
@@ -50,6 +55,10 @@ function ChatDetailCtrl($scope, $timeout, $ionicScrollDelegate, Chat, $statePara
     function activate() {
         getMessages();
         getGuruInfo();
+        getStoList();
+        interval = $interval(function () {
+            getLongPoll()
+        }, 5000)
     }
 
 
@@ -57,6 +66,15 @@ function ChatDetailCtrl($scope, $timeout, $ionicScrollDelegate, Chat, $statePara
         return Chat.getMessages(ctoId).then(function (response) {
             vm.messages = response;
             return vm.messages
+        })
+    }
+
+    function getStoList() {
+        return Sto.getStoList().then(function (response) {
+            vm.stoList = response;
+            console.log(response);
+            convertStoList();
+            return vm.stoList;
         })
     }
 
@@ -96,10 +114,36 @@ function ChatDetailCtrl($scope, $timeout, $ionicScrollDelegate, Chat, $statePara
     }
 
     function getGuruInfo() {
-        return Guru.getGuruInfo().then(function(response) {
+        return Guru.getGuruInfo().then(function (response) {
             vm.guruInfo = response;
             vm.myId = response.account_id;
             return vm.guruInfo;
         })
     }
+
+    function getLongPoll() {
+        return Chat.getLongPoll().then(function (response) {
+            if (response) {
+                console.log(response);
+                vm.messages.push(response)
+            }
+
+        })
+    }
+
+    function convertStoList() {
+        for (var i = 0, l = vm.stoList.length; i < l; i += 1) {
+            var a = vm.stoList[i].sto_id;
+            stoConvertedList[a] = {
+                name: vm.stoList[i].sto_name,
+                state: '',
+                address: vm.stoList[i].sto_addr,
+                region_id: vm.stoList[i].region_id,
+                sto_lat: vm.stoList[i].sto_lat,
+                sto_lon: vm.stoList[i].sto_lon,
+                sto_url: vm.stoList[i].sto_url
+            }
+        }
+    }
+
 }
